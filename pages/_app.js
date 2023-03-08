@@ -1,8 +1,11 @@
 import '@/styles/globals.scss'
 import { RecoilRoot } from 'recoil'
+import { StyledEngineProvider } from '@mui/material/styles'
 
 export default function App({ Component, pageProps }) {
   return <RecoilRoot>
-    <Component {...pageProps} />
+    <StyledEngineProvider injectFirst>
+      <Component {...pageProps} />
+    </StyledEngineProvider>
   </RecoilRoot>
 }
