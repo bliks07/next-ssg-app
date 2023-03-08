@@ -15,6 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        {process.env.NEXT_PUBLIC_API_URL}
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
