@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 import { useRecoilState } from 'recoil'
 import { currentUserState } from "@/recoil/recoil_state"
 import Button from '@mui/material/Button'
@@ -17,6 +18,8 @@ function LoginPage() {
     //     "https://gorest.co.in/public/v2/users",
     //     fetcher
     // )
+
+    const { token, user } = useSelector(({ auth }) => auth)
 
     const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
 

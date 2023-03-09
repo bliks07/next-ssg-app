@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 import { useRecoilState } from 'recoil'
 import { currentUserState } from "@/recoil/recoil_state"
 import { styled, useTheme } from '@mui/material/styles'
@@ -99,7 +100,10 @@ function DashboardPage() {
     const router = useRouter()
     const theme = useTheme()
 
+    const { token, user } = useSelector(({ auth }) => auth)
+
     const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
+
     const [open, setOpen] = React.useState(false)
     const [anchorEl, setAnchorEl] = React.useState(null)
 
