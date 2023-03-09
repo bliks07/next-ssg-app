@@ -1,7 +1,7 @@
 import { axiosInstance } from '../../axios/axios'
 
 export const getCurrentUserRequest = async (token) =>
-    await axiosInstance.post('/api/user/current', {}, {
+    await axiosInstance.get('users', {}, {
         headers: {
             Authorization: 'Bearer ' + token
         }

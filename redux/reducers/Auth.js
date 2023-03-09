@@ -8,7 +8,7 @@ import {
 const initialState = {
     loading: false,
     token: null,
-    user: 'test user',
+    user: null,
 }
 
 // This export default will control your state for your application
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
 
             return {
                 ...state,
-                user: action?.payload?.user,
+                user: action?.payload?.[0],
                 loading: false
             }
 

@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRecoilState } from 'recoil'
 import { currentUserState } from "@/recoil/recoil_state"
@@ -25,7 +24,8 @@ import MailIcon from '@mui/icons-material/Mail'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
-import Layout from '@/components/layout'
+import Layout from '@/components/buyerLayout'
+import { setAuthState } from "@/redux/actions/Auth"
 
 const drawerWidth = 240
 
@@ -97,15 +97,15 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 )
 
 function DashboardPage() {
-    const router = useRouter()
     const theme = useTheme()
+    const dispatch = useDispatch()
 
-    const { token, user } = useSelector(({ auth }) => auth)
+    const { user } = useSelector(({ auth }) => auth)
 
     const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
 
-    const [open, setOpen] = React.useState(false)
-    const [anchorEl, setAnchorEl] = React.useState(null)
+    const [open, setOpen] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null)
 
     const handleDrawerOpen = () => {
         setOpen(true)
@@ -124,7 +124,7 @@ function DashboardPage() {
     }
 
     const handleLogout = () => {
-        router.push('/login')
+        dispatch(setAuthState({ user: null }))
     }
 
     return (
