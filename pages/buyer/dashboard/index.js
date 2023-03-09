@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { useRouter } from 'next/router'
+import { useRecoilState } from 'recoil'
+import { currentUserState } from "@/recoil/recoil_state"
 import { styled, useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import MuiDrawer from '@mui/material/Drawer'
@@ -93,10 +95,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 )
 
-export default function BuyerPage() {
+function DashboardPage() {
     const router = useRouter()
     const theme = useTheme()
 
+    const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
     const [open, setOpen] = React.useState(false)
     const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -233,6 +236,8 @@ export default function BuyerPage() {
                 </Drawer>
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <DrawerHeader />
+
+                    {currentUser}
                     <Typography paragraph>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
@@ -265,3 +270,5 @@ export default function BuyerPage() {
         </Layout>
     )
 }
+
+export default DashboardPage
