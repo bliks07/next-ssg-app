@@ -43,7 +43,7 @@ function LoginPage() {
     return (
         <Layout>
             <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
-                <form className="flex flex-col items-center p-8 bg-white rounded-lg shadow-md" onSubmit={handleSubmit}>
+                <form className="flex flex-col items-center p-8 bg-white rounded-lg shadow-md w-[350px]" onSubmit={handleSubmit}>
                     <h1 className="text-2xl font-bold mb-8">Login</h1>
                     
                     <TextField
