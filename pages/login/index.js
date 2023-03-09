@@ -43,8 +43,6 @@ function LoginPage() {
                 <form className="flex flex-col items-center p-8 bg-white rounded-lg shadow-md" onSubmit={handleSubmit}>
                     <h1 className="text-2xl font-bold mb-8">Login</h1>
                     
-                    {currentUser}
-
                     <TextField
                         className="w-full mb-4"
                         label="Email"
