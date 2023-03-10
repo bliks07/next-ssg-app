@@ -1,7 +1,15 @@
 import {
     SET_AUTH_STATE,
-    GET_CURRENT_USER, GET_CURRENT_USER_SUCCESS
+    GET_CURRENT_USER, GET_CURRENT_USER_SUCCESS,
+    SIGN_OUT_USER,
 } from '../action-types'
+
+export const setAuthState = (state) => {
+    return {
+        type: SET_AUTH_STATE,
+        payload: state,
+    }
+}
 
 export const getCurrentUser = (token) => {
     return {
@@ -17,12 +25,14 @@ export const getCurrentUserSuccess = (data) => {
     }
 }
 
-export const setAuthState = (state) => {
+export const signOutUser = (state) => {
     return {
-        type: SET_AUTH_STATE,
+        type: SIGN_OUT_USER,
         payload: state,
     }
 }
+
+
 
 
 

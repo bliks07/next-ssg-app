@@ -25,7 +25,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Layout from '@/components/buyerLayout'
-import { setAuthState } from "@/redux/actions/Auth"
+import { signOutUser } from "@/redux/actions/Auth"
 
 const drawerWidth = 240
 
@@ -124,7 +124,7 @@ function DashboardPage() {
     }
 
     const handleLogout = () => {
-        dispatch(setAuthState({ user: null }))
+        dispatch(signOutUser())
     }
 
     return (
@@ -146,7 +146,7 @@ function DashboardPage() {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-                            Mini variant drawer
+                            Dashboard
                         </Typography>
 
                         <div>
