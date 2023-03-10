@@ -1,10 +1,10 @@
 import { useState, createContext, useContext } from 'react'
 import Head from 'next/head'
 
-const CurrentUserContext = createContext(null)
+//const CurrentUserContext = createContext(null)
 
 export default function Layout({ children }) {
-    const [currentUser, setCurrentUser] = useState('test')
+    //const [currentUser, setCurrentUser] = useState('test')
 
     return (
         <>
@@ -14,15 +14,19 @@ export default function Layout({ children }) {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main>
+            {/* <main>
                 <CurrentUserContext.Provider
                     value={currentUser}
                 >
                     {children}
                 </CurrentUserContext.Provider>
+            </main> */}
+
+            <main>
+                {children}
             </main>
         </>
     )
 }
 
-export { CurrentUserContext }
+//export { CurrentUserContext }

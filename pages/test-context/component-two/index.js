@@ -6,8 +6,13 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Link from 'next/link'
 
-function ComponentTwo() {
-    console.log('Rendering Context Component 2')
+function ComponentTwo({ withMemo = false }) {
+    if(withMemo) {
+        console.log('Rendering Context Component 2 with Memo')
+    } else {
+        console.log('Rendering Context Component 2')
+
+    }
 
     const router = useRouter()
 

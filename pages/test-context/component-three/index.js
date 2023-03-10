@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import Layout from '@/components/contextLayout'
@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Link from 'next/link'
+import MContext from '@/components/contextProvider'
 
 function ComponentThree() {
     console.log('Rendering Context Component 3')
@@ -13,6 +14,8 @@ function ComponentThree() {
     const router = useRouter()
 
     const { user } = useSelector(({ auth }) => auth)
+
+    const currentUser = useContext(MContext)
 
     const goBack = () => {
         router.push('/test-context')

@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import Layout from '@/components/contextLayout'
+import ContextLayout from '@/components/contextLayout'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { CurrentUserContext } from '../index'
+//import { CurrentUserContext } from '../index'
+import MContext from '@/components/contextProvider'
 
 function ComponentOne() {
     console.log('Rendering Context Component 1')
@@ -13,15 +14,14 @@ function ComponentOne() {
     const router = useRouter()
     //const currentUser = useContext(CurrentUserContext)
     const { user } = useSelector(({ auth }) => auth)
-
-    //console.log(currentUser)
+    const currentUser = useContext(MContext)
 
     const goBack = () => {
         router.push('/test-context')
     }
 
     return (
-        <Layout>
+        <ContextLayout>
             <div className="flex flex-col justify-center items-center bg-gray-100 p-8">
                 <Stack direction="column" spacing={2}>
                     <Typography variant="h3" noWrap component="div" sx={{ flexGrow: 1 }}>
@@ -31,7 +31,7 @@ function ComponentOne() {
                     {/* <Button variant="contained" onClick={goBack}>Go Back</Button> */}
                 </Stack>
             </div>
-        </Layout>
+        </ContextLayout>
     )
 }
 

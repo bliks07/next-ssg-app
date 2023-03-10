@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import Layout from '@/components/contextLayout'
 import Button from '@mui/material/Button'
@@ -11,19 +11,24 @@ import { setAuthState } from "@/redux/actions/Auth"
 import ComponentOne from './component-one'
 import ComponentTwo from './component-two'
 import ComponentThree from './component-three'
+import MContext from '@/components/contextProvider'
 
 function TestContext() {
     console.log('Rendering Context Parent')
 
     const dispatch = useDispatch()
 
-    const updateContext = () => {
+    const [currentUser, setCurrentUser] = useState(0)
 
+    const updateContext = () => {
+        setCurrentUser(currentUser + 1)
     }
 
     const updateRedux = () => {
         dispatch(setAuthState({ user: 'test' }))
     }
+
+    const ComponentTwoWithMemo = useMemo(() => <ComponentTwo withMemo={true} />, [])
 
     return (
         <Layout>
@@ -43,17 +48,20 @@ function TestContext() {
                         </MenuList>
                     </Paper> */}
 
-                    <Paper>
-                        <ComponentOne />
-                    </Paper>
+                    <MContext.Provider value={currentUser}>
+                        <Paper>
+                            <ComponentOne />
+                        </Paper>
 
-                    <Paper>
-                        <ComponentTwo />
-                    </Paper>
+                        <Paper>
+                            <ComponentTwo />
+                            {ComponentTwoWithMemo}
+                        </Paper>
 
-                    <Paper>
-                        <ComponentThree />
-                    </Paper>
+                        <Paper>
+                            <ComponentThree />
+                        </Paper>
+                    </MContext.Provider>
 
                     <Button variant="contained" onClick={updateContext}>Update Context</Button>
 
