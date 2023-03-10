@@ -4,6 +4,7 @@ import {
     FETCH_SUCCESS,
     FETCH_EXPIRED,
     FETCH_ERROR,
+    SET_USER_LOCALE,
 } from '../action-types'
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
     message: '',
     loading: false,
     expired: false,
+    userLocale: 'en',
 }
 
 export default (state = initialState, action) => {
@@ -37,6 +39,13 @@ export default (state = initialState, action) => {
 
         case FETCH_ERROR: {
             return { ...state, error: action.payload, message: '', loading: false }
+        }
+
+        case SET_USER_LOCALE: {
+            return {
+                ...state,
+                userLocale: action?.payload,
+            }
         }
 
         default:

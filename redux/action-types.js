@@ -4,6 +4,7 @@ export const FETCH_START = 'FETCH_START'
 export const FETCH_SUCCESS = 'FETCH_SUCCESS'
 export const FETCH_EXPIRED = 'FETCH_EXPIRED'
 export const FETCH_ERROR = 'FETCH_ERROR'
+export const SET_USER_LOCALE = 'SET_USER_LOCALE'
 
 /*=========== Auth ==========*/
 export const SET_AUTH_STATE = 'SET_AUTH_STATE'

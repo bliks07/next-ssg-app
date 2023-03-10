@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRecoilState } from 'recoil'
 import { currentUserState } from "@/recoil/recoil_state"
+import { injectIntl } from "react-intl"
 import { styled, useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import MuiDrawer from '@mui/material/Drawer'
@@ -24,8 +25,12 @@ import MailIcon from '@mui/icons-material/Mail'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import Stack from '@mui/material/Stack'
 import Layout from '@/components/buyerLayout'
 import { signOutUser } from "@/redux/actions/Auth"
+import { setUserLocale } from "@/redux/actions/Common"
 
 const drawerWidth = 240
 
@@ -96,11 +101,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 )
 
-function DashboardPage() {
+function DashboardPage({ intl }) {
     const theme = useTheme()
     const dispatch = useDispatch()
 
     const { user } = useSelector(({ auth }) => auth)
+    const { userLocale } = useSelector(({ common }) => common)
 
     const [currentUser, setCurrentUser] = useRecoilState(currentUserState)
 
@@ -127,6 +133,10 @@ function DashboardPage() {
         dispatch(signOutUser())
     }
 
+    const handleLangChange = (event) => {
+        dispatch(setUserLocale(event?.target?.value))
+    }
+
     return (
         <Layout>
             <Box sx={{ display: 'flex' }}>
@@ -148,6 +158,18 @@ function DashboardPage() {
                         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
                             Dashboard
                         </Typography>
+
+                        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                            <Select
+                                labelId="demo-select-small"
+                                id="demo-select-small"
+                                value={userLocale}
+                                onChange={handleLangChange}
+                            >
+                                <MenuItem value={'en'}>English</MenuItem>
+                                <MenuItem value={'fr'}>Français</MenuItem>
+                            </Select>
+                        </FormControl>
 
                         <div>
                             <IconButton
@@ -241,37 +263,19 @@ function DashboardPage() {
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <DrawerHeader />
 
-                    <Typography paragraph>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-                        enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-                        imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-                        Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-                        Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                        adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-                        nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-                        leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-                        feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-                        consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-                        sapien faucibus et molestie ac.
-                    </Typography>
-                    <Typography paragraph>
-                        Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-                        eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-                        neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-                        tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-                        sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-                        tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-                        gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                        et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-                        tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-                        eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-                        posuere sollicitudin aliquam ultrices sagittis orci a.
-                    </Typography>
+                    <Stack direction="column" spacing={3}>
+                        <Typography variant="h1" className="text-5xl font-bold">
+                            {intl.formatMessage({ id: 'dashboard.heading' })}
+                        </Typography>
+
+                        <pre>
+                            {intl.formatMessage({ id: 'dashboard.desc' })}
+                        </pre>
+                    </Stack>
                 </Box>
             </Box>
         </Layout>
     )
 }
 
-export default DashboardPage
+export default injectIntl(DashboardPage)

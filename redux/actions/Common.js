@@ -4,6 +4,7 @@ import {
     FETCH_SUCCESS,
     FETCH_EXPIRED,
     FETCH_ERROR,
+    SET_USER_LOCALE,
 } from '../action-types'
 
 export const setCommonState = (state) => {
@@ -35,5 +36,12 @@ export const fetchError = (error) => {
     return {
         type: FETCH_ERROR,
         payload: error
+    }
+}
+
+export const setUserLocale = (locale) => {
+    return {
+        type: SET_USER_LOCALE,
+        payload: locale
     }
 }
