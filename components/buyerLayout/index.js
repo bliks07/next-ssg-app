@@ -15,7 +15,7 @@ export default function Layout({ children }) {
 
     // if (!user) {
     //     router.push('/login')
-    //     return null
+    //     return <>Not logged in</>
     // }
 
     return (

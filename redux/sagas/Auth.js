@@ -43,5 +43,5 @@ function* getCurrentUser({ token }) {
 
 // Export the saga (todo-saga)
 export default function* todoSaga() {
-    yield takeEvery(GET_CURRENT_USER, getCurrentUser)
+    yield takeLatest(GET_CURRENT_USER, getCurrentUser)
 }
