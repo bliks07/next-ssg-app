@@ -4,6 +4,10 @@ import store from '@/redux/store'
 import { RecoilRoot } from 'recoil'
 import { StyledEngineProvider } from '@mui/material/styles'
 import AppIntlProvider from '@/components/appIntlProvider'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }) {
   return (
@@ -11,7 +15,10 @@ export default function App({ Component, pageProps }) {
       <AppIntlProvider>
         <RecoilRoot>
           <StyledEngineProvider injectFirst>
-            <Component {...pageProps} />
+            <QueryClientProvider client={queryClient}>
+              <Component {...pageProps} />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
           </StyledEngineProvider>
         </RecoilRoot>
       </AppIntlProvider>
